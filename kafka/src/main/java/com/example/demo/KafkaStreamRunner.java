@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Properties;
 
 @Slf4j
-@Component
+//@Component
 public class KafkaStreamRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {

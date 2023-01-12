@@ -1,0 +1,8 @@
+server:
+  port: 8090
+spring:
+  kafka:
+    streams:
+      state:
+        dir: "/tmp/kafka-test/"
+    bootstrap-servers: localhost:9092

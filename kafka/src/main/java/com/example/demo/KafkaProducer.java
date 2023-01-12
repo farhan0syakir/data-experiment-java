@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
@@ -10,16 +11,24 @@ import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.Produced;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Properties;
 
 @Slf4j
+@AllArgsConstructor
 @Component
-public class KafkaProducer implements CommandLineRunner {
-	@Override
-	public void run(String... args) throws Exception {
-		log.info("run producer");
+public class KafkaProducer {
+
+	private final KafkaTemplate<String, String> kafkaTemplate;
+
+	public void sendMessage(String message) {
+		kafkaTemplate.send("input-topic", message)
+				.addCallback(
+						result -> log.info("Message sent to topic: {}", message),
+						ex -> log.error("Failed to send message", ex)
+				);
 	}
 }
