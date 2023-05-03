@@ -1,0 +1,9 @@
+myapp:
+  input-topic: my-input-topic
+  application-id: my-app-id-0
+spring:
+  kafka:
+    streams:
+      state:
+        dir: "/tmp/kafka-test/"
+    bootstrap-servers: localhost:9092
